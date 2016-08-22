@@ -1,0 +1,37 @@
+.stats
+    .pull-left
+        h4
+            span.label.label-info Current Turn: {{teams[current.player]}}
+    .pull-right
+        h4
+            span.label.label-success {{score[current.player]}} Points
+
+div(ng-repeat="(category, subCategory) in questions" style="width: {{width()}}%;").col
+    .title(style="height: {{height()}}%;")
+        span(ng-bind="category")
+    ul.sub-categories(style="height: {{100-height()}}%;")
+        li(ng-repeat="(points, question) in subCategory" data-id="{{id(category, points)}}" style="height: {{height()}}%;")
+            span(ng-click="ask(category, points, question)" ng-bind="points")
+
+.modal.fade#teamsMdl
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Choose the number of teams you'd like!
+            .modal-body
+                .input-group
+                    span.input-group-addon: i.glyphicon.glyphicon-user
+                    input.form-control(type="number" ng-model="intTeams" placeholder="Enter the number of teams")
+            .modal-footer
+                button.btn.btn-info(ng-click="start(intTeams)") Get Started
+
+.modal.fade#questionMdl
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title "{{current.category}}" question for {{current.points}} points!
+            .modal-body
+                h3(ng-bind="current.question")
+            .modal-footer
+                button.btn.btn-success(ng-click="right()") Correct
+                button.btn.btn-danger(ng-click="wrong()") Wrong

@@ -1,0 +1,11 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Karim Alibhai -- Designer & Developer -- @karimsanet
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    Bootstrap, AngularJS

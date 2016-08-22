@@ -1,0 +1,25 @@
+{
+  "name": "w3bp",
+  "description": "A boilerplate for web-based applications.",
+  "main": "dist/index.html",
+  "authors": [
+    "Karim Alibhai"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/karimsa/w3bp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dist/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-animate": "^1.5.8"
+  }
+}
