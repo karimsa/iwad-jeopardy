@@ -70,5 +70,6 @@ gulp.task('watch', () => {
     gulp.watch('src/js/*.js', ['compile:js']).on('change', browserSync.reload);
     gulp.watch('src/stylus/*.styl', ['compile:css']).on('change', browserSync.reload);
     gulp.watch('src/**/*.pug', ['compile:html']).on('change', browserSync.reload);
+    gulp.watch('src/questions.json', ['copy:files']).on('change', browserSync.reload);
     gulp.watch(['src/img/*.png', 'src/img/*.jpg'], ['compress:images']).on('change', browserSync.reload);
 });

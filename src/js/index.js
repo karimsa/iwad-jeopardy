@@ -20,6 +20,15 @@ window.app = function () {
         $location.html5Mode(true);
     }]);
 
+    app.directive('ngEnter', () => ($scope, $elm, $attrs) => {
+        $elm.bind('keydown keypress', evt => {
+            if ( evt.which === 13 ) {
+                $scope.$apply(() => $scope.$eval($attrs.ngEnter));
+                evt.preventDefault();
+            }
+        });
+    });
+
     app.controller('GameCtl', ['$scope', $scope => {
         $scope.questions = {};
         $scope.teams = [];
@@ -68,15 +77,20 @@ window.app = function () {
 
         $scope.right = () => {
             $scope.score[$scope.current.player] += parseInt($scope.current.points);
-            $scope.current.player += 1;
-            if ($scope.current.player === $scope.teams.length) $scope.current.player = 0;
+            
             $('#questionMdl').modal('hide');
+            $('#answerMdl').modal('show');
         };
 
         $scope.wrong = () => {
+            $('#questionMdl').modal('hide');
+            $('#answerMdl').modal('show');
+        };
+
+        $scope.next = () => {
             $scope.current.player += 1;
             if ($scope.current.player === $scope.teams.length) $scope.current.player = 0;
-            $('#questionMdl').modal('hide');
+            $('#answerMdl').modal('hide');
         };
     }]);
 

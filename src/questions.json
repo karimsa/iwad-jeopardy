@@ -1,42 +1,106 @@
 {
-  "Test #1": {
-    "100": "A sample question",
-    "200": "Another sample question",
-    "300": "Another sample question",
-    "400": "Another sample question",
-    "500": "Another sample question",
-    "1000": "Another sample question"
+  "Basics": {
+    "100": {
+      "question": "What is the location of a file/folder on a computer called?",
+      "answer": "A path."
+    },
+    "200": {
+      "question": "How would you print all the files in the current directory including hidden files?",
+      "answer": "ls -a"
+    },
+    "300": {
+      "question": "",
+      "answer": ""
+    },
+    "400": {
+      "question": "What is the difference between a relative and absolute path?",
+      "answer": "Absolute paths start at the root of the filesystem."
+    },
+    "500": {
+      "question": "What do the special directories \".\" and \"..\" represent?",
+      "answer": "\".\" is the current directory and \"..\" is the parent directory."
+    },
+    "1000": {
+      "question": "What do TCP and UDP stand for?",
+      "answer": "Transmission Control Protocol and User Datagram Protocol."
+    }
   },
-  "Test #2": {
-    "100": "A sample question",
-    "200": "Another sample question",
-    "300": "Another sample question",
-    "400": "Another sample question",
-    "500": "Another sample question",
-    "1000": "Another sample question"
+  "HTML": {
+    "100": {
+      "question": "What does HTML stand for?",
+      "answer": "hyper text markup language"
+    },
+    "200": {
+      "question": "What are the 3 main tags every HTML document needs?",
+      "answer": "html, head, body"
+    },
+    "300": {
+      "question": "",
+      "answer": ""
+    },
+    "400": {
+      "question": "Whats the difference between <ul> and <ol>?",
+      "answer": "unordered vs ordered, bullets vs numbers"
+    },
+    "500": {
+      "question": "How many heading tags are there?",
+      "answer": "6"
+    },
+    "1000": {
+      "question": "How would you create a hyperlink to google.com? (Describe all parts of the tag)",
+      "answer": "<a href=\"google.com\"> click here </a>"
+    }
   },
-  "Test #3": {
-    "100": "A sample question",
-    "200": "Another sample question",
-    "300": "Another sample question",
-    "400": "Another sample question",
-    "500": "Another sample question",
-    "1000": "Another sample question"
+  "CSS": {
+    "100": {
+      "question": "",
+      "answer": ""
+    },
+    "200": {
+      "question": "",
+      "answer": ""
+    },
+    "300": {
+      "question": "What colour is this rgb(0,0,255)?",
+      "answer": "Blue"
+    },
+    "400": {
+      "question": "",
+      "answer": ""
+    },
+    "500": {
+      "question": "What is the right combination of properties that will automatically size and position your background image?",
+      "answer": "background-size: cover; background-position: center center;"
+    },
+    "1000": {
+      "question": "",
+      "answer": ""
+    }
   },
-  "Test #4": {
-    "100": "A sample question",
-    "200": "Another sample question",
-    "300": "Another sample question",
-    "400": "Another sample question",
-    "500": "Another sample question",
-    "1000": "Another sample question"
-  },
-  "Test #5": {
-    "100": "A sample question",
-    "200": "Another sample question",
-    "300": "Another sample question",
-    "400": "Another sample question",
-    "500": "Another sample question",
-    "1000": "Another sample question"
+  "JS": {
+    "100": {
+      "question": "",
+      "answer": ""
+    },
+    "200": {
+      "question": "",
+      "answer": ""
+    },
+    "300": {
+      "question": "",
+      "answer": ""
+    },
+    "400": {
+      "question": "",
+      "answer": ""
+    },
+    "500": {
+      "question": "",
+      "answer": ""
+    },
+    "1000": {
+      "question": "",
+      "answer": ""
+    }
   }
 }

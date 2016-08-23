@@ -31,7 +31,17 @@ div(ng-repeat="(category, subCategory) in questions" style="width: {{width()}}%;
             .modal-header
                 h4.modal-title "{{current.category}}" question for {{current.points}} points!
             .modal-body
-                h3(ng-bind="current.question")
+                h3(ng-bind="current.question.question")
             .modal-footer
                 button.btn.btn-success(ng-click="right()") Correct
                 button.btn.btn-danger(ng-click="wrong()") Wrong
+
+.modal.fade#answerMdl
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title "{{current.category}}" question for {{current.points}} points!
+            .modal-body
+                h3(ng-bind="current.question.answer")
+            .modal-footer
+                button.btn.btn-success(ng-click="next()") Next
