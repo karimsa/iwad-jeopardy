@@ -30,10 +30,17 @@ window.app = function () {
     });
 
     app.controller('GameCtl', ['$scope', $scope => {
+        let think = $('#think'),
+            questionMdl = $('#questionMdl'),
+            answerMdl = $('#answerMdl'),
+            scoreboard = $('#scoreboard'),
+            stealMdl = $('#stealMdl');
+
         $scope.questions = {};
         $scope.teams = [];
         $scope.score = [];
         $scope.current = { player: 0 };
+        $scope.time = 30;
 
         $('#teamsMdl').modal('show');
 
@@ -70,27 +77,58 @@ window.app = function () {
 
             li.addClass('clicked');
             setTimeout(() => {
-                $('#questionMdl').modal('show');
+                questionMdl.modal('show');
                 li.addClass('disabled');
+                think.get(0).play();
             }, 2001);
         };
 
+        think.on('timeupdate', () => {
+            let e = think.get(0);
+            $scope.$apply(() => $scope.time = Math.round(e.duration - e.currentTime));
+        });
+
         $scope.right = () => {
             $scope.score[$scope.current.player] += parseInt($scope.current.points);
-            
-            $('#questionMdl').modal('hide');
-            $('#answerMdl').modal('show');
+            $scope.current.player += 1;
+            if ($scope.current.player === $scope.teams.length) $scope.current.player = 0;
+            answerMdl.modal('hide');
         };
 
         $scope.wrong = () => {
-            $('#questionMdl').modal('hide');
-            $('#answerMdl').modal('show');
+            $scope.current.player += 1;
+            if ($scope.current.player === $scope.teams.length) $scope.current.player = 0;
+            answerMdl.modal('hide');
         };
 
         $scope.next = () => {
-            $scope.current.player += 1;
-            if ($scope.current.player === $scope.teams.length) $scope.current.player = 0;
-            $('#answerMdl').modal('hide');
+            think.get(0).pause();
+            think.get(0).currentTime = 0;
+
+            stealMdl.modal('hide');
+            questionMdl.modal('hide');
+            answerMdl.modal('show');
+        };
+
+        $scope.scoreboard = () => {
+            scoreboard.modal('toggle');
+        };
+
+        $scope.steal = index => {
+            if (index === undefined) {
+                think.get(0).pause();
+                think.get(0).currentTime = 0;
+
+                questionMdl.modal('hide');
+                stealMdl.modal('show');
+            } else {
+                $scope.score[index] += parseInt($scope.current.points);
+                $scope.current.player += 1;
+                if ($scope.current.player === $scope.teams.length) $scope.current.player = 0;
+
+                stealMdl.modal('hide');
+                answerMdl.modal('show');
+            }
         };
     }]);
 

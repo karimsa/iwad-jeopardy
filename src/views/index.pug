@@ -2,6 +2,8 @@
     .pull-left
         h4
             span.label.label-info Current Turn: {{teams[current.player]}}
+    .center
+        a.btn.btn-md.btn-default(href="#" ng-click="scoreboard()") View Scores
     .pull-right
         h4
             span.label.label-success {{score[current.player]}} Points
@@ -21,7 +23,7 @@ div(ng-repeat="(category, subCategory) in questions" style="width: {{width()}}%;
             .modal-body
                 .input-group
                     span.input-group-addon: i.glyphicon.glyphicon-user
-                    input.form-control(type="number" ng-model="intTeams" placeholder="Enter the number of teams")
+                    input.form-control(type="number" ng-model="intTeams" ng-enter="start(intTeams)" placeholder="Enter the number of teams")
             .modal-footer
                 button.btn.btn-info(ng-click="start(intTeams)") Get Started
 
@@ -32,16 +34,50 @@ div(ng-repeat="(category, subCategory) in questions" style="width: {{width()}}%;
                 h4.modal-title "{{current.category}}" question for {{current.points}} points!
             .modal-body
                 h3(ng-bind="current.question.question")
+                h1.time(ng-bind="time")
             .modal-footer
-                button.btn.btn-success(ng-click="right()") Correct
-                button.btn.btn-danger(ng-click="wrong()") Wrong
+                button.btn.btn-warning(ng-click="steal()") Steal!
+                button.btn.btn-primary(ng-click="next()") View Answer &raquo;
+
+.modal.fade#stealMdl
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Who's stealing?
+            .modal-body
+                button.btn.btn-block.btn-primary(ng-repeat="(index,team) in teams" ng-click="steal(index)") {{team}}
+            .modal-footer
+                button.btn.btn-primary(ng-click="next()") View Answer &raquo;
 
 .modal.fade#answerMdl
     .modal-dialog
         .modal-content
             .modal-header
                 h4.modal-title "{{current.category}}" question for {{current.points}} points!
+                button.close(type="button" data-dismiss="modal"): span &times;
             .modal-body
                 h3(ng-bind="current.question.answer")
             .modal-footer
-                button.btn.btn-success(ng-click="next()") Next
+                button.btn.btn-success(ng-click="right()") Correct
+                button.btn.btn-danger(ng-click="wrong()") Wrong
+
+.modal.fade#scoreboard
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h4.modal-title Scoreboard
+                button.close(type="button" data-dismiss="modal"): span &times;
+            .modal-body
+                table.table.table-hover
+                    thead
+                        th Team
+                        th Score
+                    tbody
+                        tr(ng-repeat="(team,tScore) in score track by team" ng-class="{ 'active': team === current.player }")
+                            td(ng-bind="teams[team]")
+                            td(ng-bind="tScore")
+            .modal-footer
+                button.btn.btn-default(ng-click="scoreboard()") Close
+
+audio(preload)#think
+    source(src="mp3/think.mp3" type="audio/mpeg")

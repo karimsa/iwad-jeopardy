@@ -26,7 +26,7 @@ gulp.task('compile:js', ['lint'], () =>
         .pipe(plugins.uglify({ preserveComments: 'license' }))
         .pipe(plugins.rename({ extname: '.min.js' }))
         .pipe(plugins.sourcemaps.write('./'))
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('docs/js'))
 );
 
 gulp.task('compile:css', () =>
@@ -38,24 +38,29 @@ gulp.task('compile:css', () =>
         }))
         .pipe(plugins.rename({ extname: '.min.css' }))
         .pipe(plugins.sourcemaps.write('./'))
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest('docs/css'))
 );
 
 gulp.task('compile:html', () =>
     gulp.src(['src/**/*.pug'])
         .pipe(plugins.pug())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('docs'))
 );
 
-gulp.task('copy:files', () =>
+gulp.task('copy:mp3', () =>
+    gulp.src(['src/mp3/*.mp3'])
+        .pipe(gulp.dest('docs/mp3'))
+);
+
+gulp.task('copy:files', ['copy:mp3'], () =>
     gulp.src(['src/404.html', 'src/*.txt', 'src/questions.json'])
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('docs'))
 );
 
 gulp.task('compress:images', () =>
     gulp.src(['src/img/*.png', 'src/img/*.jpg'])
         .pipe(plugins.imagemin())
-        .pipe(gulp.dest('dist/img'))
+        .pipe(gulp.dest('docs/img'))
 );
 
 gulp.task('default', ['compile:html', 'compile:js', 'compile:css', 'compress:images', 'copy:files']);
@@ -63,13 +68,13 @@ gulp.task('default', ['compile:html', 'compile:js', 'compile:css', 'compress:ima
 gulp.task('watch', () => {
     browserSync.init({
         server: {
-            baseDir: './dist'
+            baseDir: './docs'
         }
     });
 
     gulp.watch('src/js/*.js', ['compile:js']).on('change', browserSync.reload);
     gulp.watch('src/stylus/*.styl', ['compile:css']).on('change', browserSync.reload);
     gulp.watch('src/**/*.pug', ['compile:html']).on('change', browserSync.reload);
-    gulp.watch('src/questions.json', ['copy:files']).on('change', browserSync.reload);
+    gulp.watch(['src/questions.json', 'src/mp3/*.mp3'], ['copy:files']).on('change', browserSync.reload);
     gulp.watch(['src/img/*.png', 'src/img/*.jpg'], ['compress:images']).on('change', browserSync.reload);
 });
